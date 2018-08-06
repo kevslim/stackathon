@@ -1,33 +1,46 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { createStackNavigator } from 'react-navigation';
+import { withAuthenticator } from 'aws-amplify-react-native';
+import Home from './src/Home';
+import AddPage from './src/Add';
+import Patient from './src/Patient';
 
-export default class App extends Component<Props> {
+class App extends Component<Props> {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+    return <RootStack />;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const MainStack = createStackNavigator(
+  {
+    HomePage: Home,
+    Add: AddPage,
+    PatientPage: Patient,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  {
+    initialRouteName: 'HomePage',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#0080FF',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen: MainStack,
+    },
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    mode: 'card',
+    headerMode: 'none',
+  }
+);
+
+export default withAuthenticator(App);

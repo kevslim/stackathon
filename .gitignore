@@ -55,6 +55,9 @@ buck-out/
 # Bundle artifact
 *.jsbundle
 
+#package-lock.json
+package-lock.json
+
 #awsmobilejs
 appsync-info.json
 aws-info.json
@@ -63,6 +66,3 @@ aws-exports.*
 awsmobilejs/.awsmobile/backend-build
 awsmobilejs/\#current-backend-info
 ~awsmobilejs-*/
-
-#package-lock.json
-package-lock.json

@@ -1,14 +1,157 @@
 --- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      NotesCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: false
+          name: NotesCRUD
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /Notes: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/Notes-20180806103956.zip
+            description: 'Handler for calls to resource path : /Notes/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: S6hGFhyC15d/fRDJDLJKOyRMshApWYyBE6VcxmbPAPQ=
+            memorySize: '128'
+            modified: '2018-08-06T15:40:35.548+0000'
+            name: Notes
+            runtime: nodejs6.10
+            timeout: '3'
+            version: Pa5xG.DWy5exjgou1hllNA87qxDpqyiS
+          '/Notes/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/Notes-20180806103956.zip
+            description: 'Handler for calls to resource path : /Notes/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: S6hGFhyC15d/fRDJDLJKOyRMshApWYyBE6VcxmbPAPQ=
+            memorySize: '128'
+            modified: '2018-08-06T15:40:35.548+0000'
+            name: Notes
+            runtime: nodejs6.10
+            timeout: '3'
+            version: Pa5xG.DWy5exjgou1hllNA87qxDpqyiS
+      sampleCloudApi: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: false
+          name: sampleCloudApi
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /items: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/sampleLambda-20180806120252.zip
+            description: 'Handler for calls to resource path : /items/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: tfciWIoBIGPfIndHS11NGwZHKBPwJiqhbDvUoFlsGYU=
+            memorySize: '128'
+            modified: '2018-08-06T17:03:55.205+0000'
+            name: sampleLambda
+            runtime: nodejs6.10
+            timeout: '3'
+            version: DyZhP3iV9KEIbVqEgzvWkflaysYlWv9Q
+          '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/sampleLambda-20180806120252.zip
+            description: 'Handler for calls to resource path : /items/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: tfciWIoBIGPfIndHS11NGwZHKBPwJiqhbDvUoFlsGYU=
+            memorySize: '128'
+            modified: '2018-08-06T17:03:55.205+0000'
+            name: sampleLambda
+            runtime: nodejs6.10
+            timeout: '3'
+            version: kTQyAuHiV_Fy.e4.zM6guoC3HyLXxYTt
+      todosCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: true
+          name: todosCRUD
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /todos: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/todos-20180806120252.zip
+            description: 'Handler for calls to resource path : /todos/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: EEJp6MEZCeaGgCJN7sWpH92wWqQZI7LMVOQAxRVvlg0=
+            memorySize: '128'
+            modified: '2018-08-06T17:03:55.351+0000'
+            name: todos
+            runtime: nodejs6.10
+            timeout: '3'
+            version: Pgf8q.TudRpPi3EJLM7_1YrmHJ7EqeY7
+          '/todos/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/todos-20180806120252.zip
+            description: 'Handler for calls to resource path : /todos/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: EEJp6MEZCeaGgCJN7sWpH92wWqQZI7LMVOQAxRVvlg0=
+            memorySize: '128'
+            modified: '2018-08-06T17:03:55.351+0000'
+            name: todos
+            runtime: nodejs6.10
+            timeout: '3'
+            version: fRFlphc.XbZS53NpLjg2k1hwaHZuzm3b
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
       visibility: public-global
     components:
       release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              content: S
+              creationDate: N
+              noteId: S
+              title: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: userId
+                hashKeyType: S
+                indexName: DateSorted
+                rangeKeyName: creationDate
+                rangeKeyType: N
+            rangeKeyName: noteId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-Notes
+            tablePrivacy: protected
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              team: S
+              text: S
+              todoId: S
+            hashKeyName: team
+            hashKeyType: S
+            rangeKeyName: todoId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-todos
+            tablePrivacy: public
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
-  sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: true
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          user-pool-id: us-west-2_Is5wXFSDK
 name: thirdTry-2018-08-06-09-37-23
 region: us-west-1
